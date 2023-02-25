@@ -35,8 +35,51 @@ const restaurant = {
   orderDelivery: function({starterIndex,mainIndex,time,address}){
     // console.log(obj);//{time:2230-----って感じで表示される。}
     console.log(`Order Received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+  },
+
+  orderPasta:function(ing1,ing2,ing3){
+    console.log(`Here is really delicios pasta with ${ing1},${ing2} and ${ing3}`);
   }
 };
+
+const arr = [7,8,9];
+const badNewArr = [1,2,arr[0],arr[1],arr[2]];
+console.log(badNewArr); //(5)[1,2,7,8,9] そうだ。
+//これをspreadオペレーターでもっと良く早く描けるようになりました。
+
+const newArr = [1,2,...arr];
+console.log(newArr);///(5)[1,2,7,8,9]これは初耳。
+//この...はarrの配列から全ての値を取り出すという意味です。手書きで書くよりもいいね。この場合は数字が3つだから「描けるやろ！」って思っても、これが１００この値がある配列だったらどうよ。それにそこを変えたら全部変えな行かなくなる。
+
+console.log(...newArr); //これだと、配列じゃなくて、普通に1,2,7,8,9と表示される。
+
+const newMenu = [...restaurant.mainMenu,"Gnocci"];
+console.log(newMenu); //(4)Pizza,Pasta,Risotto,Gnocciになる。pushじゃないんだね。
+
+
+//2つの配列の結合について
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy);
+
+const menu =[...restaurant.starterMenu,...restaurant.mainMenu];
+console.log(menu); //７個出てくる。
+
+const str = "Miya";
+const letters = [...str,"","S"];
+console.log(letters); ///M I Y A  S になる。一個一個が独立してしまった！
+//このことから、配列を構築するときと、関数に値を渡すときだけ使うようにしよう。このspread オペレーター
+console.log(...str); //M I Y A
+console.log("J","O"); //J O 爆笑
+//だからテンプレートリテラルとかはできないね。
+
+const ingredients = [prompt("Let\s make pasta!Ingredients 1 ?"),prompt("Let\s make pasta!Ingredients 2 ?"),prompt("Let\s make pasta!Ingredients 3 ?")]; //promptってあれ。なんか上から出てくるやつ。
+console.log(ingredients);
+
+// restaurant.orderPasta(ingredients[0],ingredients[1],ingredients[2]);
+//これで上のorderPasta関数に値が入る。
+restaurant.orderPasta(...ingredients)//このやり方の方が、上のやり方よりもわかりやすい。というか簡単。
+
+
   restaurant.orderDelivery({
     time:"22:30",
     address: "Via del sole, 21",
@@ -55,8 +98,8 @@ const restaurant = {
   // 上記コンソール表示「Classico Italiano thu ,fri , sat, (4)[ Italian, Pizzeria,Vegetarian,organic] ってなる。さっきと全く一緒。便利
 
   //APIコールなどで、存在しないものを呼び出すこともあるかもしれないから、デフォルト値を設定指定おくと本当に便利です。
-  const{menu = [], starterMenu: starter = []} = restaurant;
-  console.log(menu,starter); // starter は前菜。アペタイザーだと思ったらフラ語。徹底している。
+  // const{menu = [], starterMenu: starter = []} = restaurant;
+  // console.log(menu,starter); // starter は前菜。アペタイザーだと思ったらフラ語。徹底している。
 //上記コンソール表示　[] (4)Foccacia, Bruschetta,Garlic Bread,Caprese Salad となる。
 //最初のところは、そもそもmenuという変数名ないし、でもそこでデフォルト値を[]空配列で設定しているため、コンソールにはこのように表示される。
 　//変数を変異させる。オブジェクト編 [main,secondary] = [secondary,main];やったよね。
