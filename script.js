@@ -49,31 +49,37 @@ const restaurant = {
 console.log("----OR----");
 //論理演算子にある3つの特徴。
 //どんなデータ型も返せて、どんなデータ型でもいけて、短縮することもできる。
-console.log(3 || "Miya"); //この結果はただの３だけ。||の場合は、boolean値でなくてもいけることが判明。
-console.log(""|| "Miya"); //Miya(左側がfalseの結果だから)
-console.log(true || 0); //true　左側がtrueのため、普通にこのまま結果表示
-console.log(undefined || null); /// null　undefinedはfalseの値よね。
-console.log(undefined || 0 ||"" || "Hello" || 23 || null); //Hello。だってhelloが最初の真の値だから。
+// console.log(3 || "Miya"); //この結果はただの３だけ。||の場合は、boolean値でなくてもいけることが判明。
+// console.log(""|| "Miya"); //Miya(左側がfalseの結果だから)
+// console.log(true || 0); //true　左側がtrueのため、普通にこのまま結果表示
+// console.log(undefined || null); /// null　undefinedはfalseの値よね。
+// console.log(undefined || 0 ||"" || "Hello" || 23 || null); //Hello。だってhelloが最初の真の値だから。
 
 // restaurant.numGuests = 38; //これが入ると38になる。
-restaurant.numGuests = 0; //0の場合は反応しないんです。だって0ってfalseじゃん。
-const guests1 = restaurant.numGuests ? restaurant.numGuests : 10; //三項演算子を使う。
-console.log(guests1); //10。だってnumGuestsまだ定義されていないから。
+// restaurant.numGuests = 0; //0の場合は反応しないんです。だって0ってfalseじゃん。
+// const guests1 = restaurant.numGuests ? restaurant.numGuests : 10; //三項演算子を使う。
+// console.log(guests1); //10。だってnumGuestsまだ定義されていないから。
 
 const guest2 = restaurant.numGuests || 10;
 console.log(guest2); //10と表示される。
 
-console.log("----AND----");
-console.log(0 && "Miya"); //0
-console.log(7 && "Miya");// Miyaと返す。
 
-console.log("Hello" && null && 23 && "Miya"); //null
+//?? というのはnullish valueというとても新しい概念。nullかundefinedになる。(NOT 0 or "")
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect); //デフォルトの値が設定されていたら、0となったけど、それをオフにしたら10と表示された。
 
-if(restaurant.orderPizza){
-  restaurant.orderPizza("mushroom" , "spinach");
-}
-
-restaurant.orderPizza && restaurant.orderPizza("mushroom" , "spinach");
+console.log("----OR----");
+// console.log("----AND----");
+// console.log(0 && "Miya"); //0
+// console.log(7 && "Miya");// Miyaと返す。
+//
+// console.log("Hello" && null && 23 && "Miya"); //null
+//
+// if(restaurant.orderPizza){
+//   restaurant.orderPizza("mushroom" , "spinach");
+// }
+//
+// restaurant.orderPizza && restaurant.orderPizza("mushroom" , "spinach");
 
 
 const arr =[1,2, ... [3,4]];
