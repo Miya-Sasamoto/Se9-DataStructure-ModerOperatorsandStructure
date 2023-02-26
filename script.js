@@ -46,6 +46,40 @@ const restaurant = {
   },
 };
 
+const rest1 = {
+  name : "Capri1",
+  // numGuests :20,
+  numGuests :0,//これだと、falseって前やったよね。　
+
+};
+
+const rest2 = {
+  name : "Rome1",
+  owner : "Miya",
+}
+
+console.log("----NOW I AM DOING----");
+console.log("----OR ASSIGNMENT OPERATOR----");
+
+// rest2.numGuests = rest1.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 10;
+
+// rest1.numGuests ||= 10; //rest2.numGuests = rest1.numGuests || 10;一緒の意味。
+// rest2.numGuests ||= 10; //rest2.numGuests = rest2.numGuests || 10;一緒の意味。
+
+console.log("----NULISH ASSGINMENT OPERATOR ----")
+rest1.numGuests ??= 10; //これだと、rest1はnumGuests0
+rest2.numGuests ??= 10;///これだと、rest2はnumGuests10
+//⇨nulishだから！
+
+// rest1.owner = rest1.owner && "<ANOUNYMOUS>"; //owner:undefinedですよ
+// rest2.owner = rest 2.owner && "<ANOUNYMOUS>"; //こうすると、rest2のownerは匿名になります。
+rest1.owner &&= "<ANOUNYMOUS>";
+rest2.owner &&= "<ANOUNYMOUS>";
+
+console.log(rest1); //{name:Capri1,numGuests:20}と表示
+console.log(rest2); //{name:Rome1,owner:Miya, numGuests:20}と表示
+
 console.log("----OR----");
 //論理演算子にある3つの特徴。
 //どんなデータ型も返せて、どんなデータ型でもいけて、短縮することもできる。
