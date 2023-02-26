@@ -39,19 +39,53 @@ const restaurant = {
 
   orderPasta:function(ing1,ing2,ing3){
     console.log(`Here is really delicios pasta with ${ing1},${ing2} and ${ing3}`);
-  }
+  },
+  orderPizza:function(mainIngredients,...otherIngredients){
+    console.log(mainIngredients);//mashrooms
+    console.log(otherIngredients);//(3)tomatos,"Basil""cheese"こう表示される！
+  },
 };
 
-const arr = [7,8,9];
-const badNewArr = [1,2,arr[0],arr[1],arr[2]];
-console.log(badNewArr); //(5)[1,2,7,8,9] そうだ。
+const arr =[1,2, ... [3,4]];
+
+
+const [a,b,...others] = [1,2,3,4,5]; ///この...othersは残りみたいな感じでまとめられる。
+console.log(a,b,others); //1,2(3)[3,4,5] と表示。
+
+const [pizza, , risotto,...otherFood] = [...restaurant.mainMenu,...restaurant.starterMenu];
+console.log(pizza,risotto,otherFood);
+///上記コンソール表示　Pizza Risotto,(4)[Foccacia,Bruschetta,Garlic Bread, Caprese Salad]　スキップされた要素は含まれない。
+
+//objects
+const {sat,...weekdays} = restaurant.openingHours;
+console.log(sat,weekdays); /// 土曜日のところだけまぁ普通に入れて、それ以外は(thuとfri)はweekdaysとして格納する。　　
+
+const add = function(...numbers){
+  // console.log(numbers); ///(2)[2,3],(4)[5,4,3,2],(5)[7,6,5,3,2]と表示される！
+  let sum = 0;
+  for (let i = 0; i<numbers.length; i++)sum += numbers[i];//最初はびっくりするけど、よくよく見るとこれはそのままです。
+  console.log(sum); //5,14,23と足し算が表示される。
+};
+add(2,3);
+add(5,4,3,2);
+add(7,6,5,3,2);
+
+const x = [23,5,7];
+add(...x); ///スプレッド演算子を使えばこれで35とコンソールに表示させることができる！　
+
+// restaurant.orderPizza("mushrooms","tomatos","Basil","cheese");
+restaurant.orderPizza("mushroom");
+
+// const arr = [7,8,9];
+// const badNewArr = [1,2,arr[0],arr[1],arr[2]];
+// console.log(badNewArr); //(5)[1,2,7,8,9] そうだ。
 //これをspreadオペレーターでもっと良く早く描けるようになりました。
 
-const newArr = [1,2,...arr];
-console.log(newArr);///(5)[1,2,7,8,9]これは初耳。
+// const newArr = [1,2,...arr];
+// console.log(newArr);///(5)[1,2,7,8,9]これは初耳。
 //この...はarrの配列から全ての値を取り出すという意味です。手書きで書くよりもいいね。この場合は数字が3つだから「描けるやろ！」って思っても、これが１００この値がある配列だったらどうよ。それにそこを変えたら全部変えな行かなくなる。
 
-console.log(...newArr); //これだと、配列じゃなくて、普通に1,2,7,8,9と表示される。
+// console.log(...newArr); //これだと、配列じゃなくて、普通に1,2,7,8,9と表示される。
 
 const newMenu = [...restaurant.mainMenu,"Gnocci"];
 console.log(newMenu); //(4)Pizza,Pasta,Risotto,Gnocciになる。pushじゃないんだね。
@@ -72,12 +106,12 @@ console.log(...str); //M I Y A
 console.log("J","O"); //J O 爆笑
 //だからテンプレートリテラルとかはできないね。
 
-const ingredients = [prompt("Let\s make pasta!Ingredients 1 ?"),prompt("Let\s make pasta!Ingredients 2 ?"),prompt("Let\s make pasta!Ingredients 3 ?")]; //promptってあれ。なんか上から出てくるやつ。
-console.log(ingredients);
+// const ingredients = [prompt("Let\s make pasta!Ingredients 1 ?"),prompt("Let\s make pasta!Ingredients 2 ?"),prompt("Let\s make pasta!Ingredients 3 ?")]; //promptってあれ。なんか上から出てくるやつ。
+// console.log(ingredients);
 
 // restaurant.orderPasta(ingredients[0],ingredients[1],ingredients[2]);
 //これで上のorderPasta関数に値が入る。
-restaurant.orderPasta(...ingredients)//このやり方の方が、上のやり方よりもわかりやすい。というか簡単。
+// restaurant.orderPasta(...ingredients)//このやり方の方が、上のやり方よりもわかりやすい。というか簡単。
 
 
   restaurant.orderDelivery({
@@ -103,12 +137,12 @@ restaurant.orderPasta(...ingredients)//このやり方の方が、上のやり�
 //上記コンソール表示　[] (4)Foccacia, Bruschetta,Garlic Bread,Caprese Salad となる。
 //最初のところは、そもそもmenuという変数名ないし、でもそこでデフォルト値を[]空配列で設定しているため、コンソールにはこのように表示される。
 　//変数を変異させる。オブジェクト編 [main,secondary] = [secondary,main];やったよね。
-let a = 111;
-let b = 123;
-const obj = {a:23, b:25, c:14};
+// let a = 111;
+// let b = 123;
+// const obj = {a:23, b:25, c:14};
 
-({a,b} = obj);//これを全体をカッコで囲むということが大事。
-console.log(a,b); //23,25と表示。
+// ({a,b} = obj);//これを全体をカッコで囲むということが大事。
+// console.log(a,b); //23,25と表示。
 
 //nested（入れ子）の場合。nested objects
 //pt.1
