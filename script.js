@@ -1,50 +1,64 @@
 'use strict';
 
 // Data needed for a later exercise
-// const flights =
-//   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
-//
-// // Data needed for first part of the section
-// const restaurant = {
-//   name: 'Classico Italiano',
-//   location: 'Via Angelo Tavanti 23, Firenze, Italy',
-//   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-//   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-//   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-//
-//   openingHours: { //これはネストされているのか。されている。
-//     thu: {
-//       open: 12,
-//       close: 22,
-//     },
-//     fri: {
-//       open: 11,
-//       close: 23,
-//     },
-//     sat: {
-//       open: 0, // Open 24 hours
-//       close: 24,
-//     },
-//   },
-//
-//   ///ここめっちゃおもしろい
-//   order: function(starterIndex,mainIndex){　//ここでfuntion定義
-//       return[this.starterMenu[starterIndex],this.mainMenu[mainIndex]];
-//       //restaurant.という意味でthis.が使われている。その中のarray　の場所を後々定義。
-//   },
-//   orderDelivery: function({starterIndex,mainIndex,time,address}){
-//     // console.log(obj);//{time:2230-----って感じで表示される。}
-//     console.log(`Order Received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
-//   },
-//
-//   orderPasta:function(ing1,ing2,ing3){
-//     console.log(`Here is really delicios pasta with ${ing1},${ing2} and ${ing3}`);
-//   },
-//   orderPizza:function(mainIngredients,...otherIngredients){
-//     console.log(mainIngredients);//mashrooms
-//     console.log(otherIngredients);//(3)tomatos,"Basil""cheese"こう表示される！
-//   },
-// };
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+// Data needed for first part of the section
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+  openingHours: { //これはネストされているのか。されている。
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  },
+
+  ///ここめっちゃおもしろい
+  order: function(starterIndex,mainIndex){　//ここでfuntion定義
+      return[this.starterMenu[starterIndex],this.mainMenu[mainIndex]];
+      //restaurant.という意味でthis.が使われている。その中のarray　の場所を後々定義。
+  },
+  orderDelivery: function({starterIndex,mainIndex,time,address}){
+    // console.log(obj);//{time:2230-----って感じで表示される。}
+    console.log(`Order Received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+  },
+
+  orderPasta:function(ing1,ing2,ing3){
+    console.log(`Here is really delicios pasta with ${ing1},${ing2} and ${ing3}`);
+  },
+  orderPizza:function(mainIngredients,...otherIngredients){
+    console.log(mainIngredients);//mashrooms
+    console.log(otherIngredients);//(3)tomatos,"Basil""cheese"こう表示される！
+  },
+};
+
+console.log("----NOW I AM ----");
+///for of looping
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) console.log(item);
+//自動的に配列全体をループする。　
+
+for (const [i ,el] of menu.entries()){
+  console.log(`${i + 1}:${el}`);
+}
+
+console.log(menu.entries());//Array Iterator{}とでる。
+
 //
 // const rest1 = {
 //   name : "Capri1",
@@ -263,7 +277,9 @@
 // // const [p=1,q=1,r=1]= [8,9]; //デフォルトの値を入れておく。
 // // console.log(p,q,r);
 
-console.log("----CODING CHALLENGE #1----");
+
+
+// console.log("----CODING CHALLENGE #1----");
 // Coding Challenge #1
 
 /*
@@ -285,76 +301,76 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 GOOD LUCK 😀
 
 */
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
-
-//1
-const[players1,players2] = game.players;
-console.log(players1,players2);
-
-//2
-const [gk,...fieldPlayers] = players1;
-console.log(gk,fieldPlayers);
-
-//3
-const allPlayer = [...players1,...players2];
-console.log(allPlayer);
-
-//4
-const players1Final = [...players1,"Thiago","Countinho","Perisic"];
-console.log(players1Final);
-
-//5 IDK oddsって何？
-const {odds:{team1,x:draw,team2}} = game;//drawとやれという指示があるため、デフォルト値を設定。
-console.log(team1,draw,team2);
-
-
-//6 IDK
-const printGoals = function(...players){
-  console.log(players);
-  console.log(`${players.length} goals were scored!`); //何人がゴールしたか。
-}
-// printGoals('Davies', 'Muller', 'Lewandowski','Kimmich');
-printGoals(...game.scored);
-
-//7 オッズの低いチームが勝つ確率が高いらしいがわからん。
-team1 < team2 && console.log("Team1 is more likely to win");
-team1 > team2 && console.log("Team2 is more likely to win");
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
+//
+// //1
+// const[players1,players2] = game.players;
+// console.log(players1,players2);
+//
+// //2
+// const [gk,...fieldPlayers] = players1;
+// console.log(gk,fieldPlayers);
+//
+// //3
+// const allPlayer = [...players1,...players2];
+// console.log(allPlayer);
+//
+// //4
+// const players1Final = [...players1,"Thiago","Countinho","Perisic"];
+// console.log(players1Final);
+//
+// //5 IDK oddsって何？
+// const {odds:{team1,x:draw,team2}} = game;//drawとやれという指示があるため、デフォルト値を設定。
+// console.log(team1,draw,team2);
+//
+//
+// //6 IDK
+// const printGoals = function(...players){
+//   console.log(players);
+//   console.log(`${players.length} goals were scored!`); //何人がゴールしたか。
+// }
+// // printGoals('Davies', 'Muller', 'Lewandowski','Kimmich');
+// printGoals(...game.scored);
+//
+// //7 オッズの低いチームが勝つ確率が高いらしいがわからん。
+// team1 < team2 && console.log("Team1 is more likely to win");
+// team1 > team2 && console.log("Team2 is more likely to win");
