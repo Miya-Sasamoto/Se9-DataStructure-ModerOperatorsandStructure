@@ -4,6 +4,24 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
+
+const weekdays = ["mon","tue","wed","thu","fri","sat","sun"];
+const openingHours = { //これはネストされているのか。されている。
+    [weekdays[3]]: {
+      open: 12,
+      close: 22,
+    },
+    [weekdays[4]]: {
+      open: 11,
+      close: 23,
+    },
+    [weekdays[5]]: {
+      open: 0, // Open 24 hours
+      close: 24,
+   },
+ };
+
+
 // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
@@ -11,36 +29,25 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  // openingHours : openingHours, //前はこういう書き方をしていた
 
-  openingHours: { //これはネストされているのか。されている。
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
+  openingHours, //いちよこれで引っ張ってこれる
+
 
   ///ここめっちゃおもしろい
-  order: function(starterIndex,mainIndex){　//ここでfuntion定義
+  order(starterIndex,mainIndex){　//ここでfuntion定義
       return[this.starterMenu[starterIndex],this.mainMenu[mainIndex]];
       //restaurant.という意味でthis.が使われている。その中のarray　の場所を後々定義。
   },
-  orderDelivery: function({starterIndex,mainIndex,time,address}){
+  orderDelivery({starterIndex,mainIndex,time,address}){
     // console.log(obj);//{time:2230-----って感じで表示される。}
     console.log(`Order Received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
   },
 
-  orderPasta:function(ing1,ing2,ing3){
+  orderPasta(ing1,ing2,ing3){
     console.log(`Here is really delicios pasta with ${ing1},${ing2} and ${ing3}`);
   },
-  orderPizza:function(mainIngredients,...otherIngredients){
+  orderPizza(mainIngredients,...otherIngredients){
     console.log(mainIngredients);//mashrooms
     console.log(otherIngredients);//(3)tomatos,"Basil""cheese"こう表示される！
   },
@@ -48,16 +55,16 @@ const restaurant = {
 
 console.log("----NOW I AM ----");
 ///for of looping
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-
-for (const item of menu) console.log(item);
-//自動的に配列全体をループする。　
-
-for (const [i ,el] of menu.entries()){
-  console.log(`${i + 1}:${el}`);
-}
-
-console.log(menu.entries());//Array Iterator{}とでる。
+// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+//
+// for (const item of menu) console.log(item);
+// //自動的に配列全体をループする。　
+//
+// for (const [i ,el] of menu.entries()){
+//   console.log(`${i + 1}:${el}`);
+// }
+//
+// console.log(menu.entries());//Array Iterator{}とでる。
 
 //
 // const rest1 = {
