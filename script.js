@@ -53,49 +53,68 @@ const restaurant = {
   },
 };
 
+const properties = Object.keys(openingHours);
+console.log(properties); //(3)[thu,fri,sat]
+
+// console.log(`We are open on ${properties.length} days`); // we are open on 3 days
+let openStr = `We are open on ${properties.length}days:`;
+
+for (const day of Object.keys(openingHours)){
+  openStr += `${day},`
+}
+  console.log(openStr); //we are open on 3 days: thu,fri,sat
+
+  const values =  Object.values(openingHours);
+  console.log(values); //3つの値が表示される。thu fri satの
+
+  const entries = Object.entries(openingHours);
+  console.log(entries); //(3)[Array(2),Array(2),Array(2)]
+// }
+for (const x of entries)console.log(x); //キーとバリューが出力
+//(2)[thu ...]みたいな！
 
 // if(restaurant.openingHours.mon)console.log(restaurant.openingHours.mon.open); //undefined
 // if(restaurant.openingHours.fri)console.log(restaurant.openingHours.fri.open); //11 設定されてるからね！
 
 //Optional Chainingというシステムが誕生した。
 //あるプロパティが存在しない場合、即座にundefinedが返されるという仕組み。
-console.log(restaurant.openingHours.mon?.open);//undefinedになる。
-console.log(restaurant.openingHours?.mon?.open); //undefined
-
-const days = ["mon","tue","wed","thu","fri","sat","sun"];
-for(const day of days){
-  //mon undefined
-  //tue undefined
-  //wed undefined
-  //thu 12
-  //fri 11
-  //sat 0
-  //sun undefined　となる！　
-
-  // console.log(day);
-  // console.log(restaurant.openingHours[day]?.open || "closed"); // ||はORダヨ！
-  // const open = restaurant.openingHours[day]?.open || "closed";
-  // console.log(`on ${day},we open at ${open}`); //テンプレートリテラル
-  //しかしこれだと0がfalsey valueということが仇になり、うまく反応しない。
-  const open = restaurant.openingHours[day]?.open ?? "closed"; //??にすると反応する nullかundefinedか
-  console.log(`on ${day},we open at ${open}`); //テンプレートリテラル
-}
-
-
-//Methods
-
-console.log(restaurant.order?.(0,1)?? "Methods does not exist");//
-//0と１で入れてるから、それがstarterIndex とmainIndexに代入されて、ここでは表示が[foccacia,pastaになる]
-console.log(restaurant.orderRisotto?.(0,1)?? "Methods does not exist");//undefined
-
-
-//Arrays
-const users = [
-    {name :"Jonas", email:"hello@jonas.com"
-    }
-];
-
-console.log(users[0]?.name ?? "Users is empty"); //Jonas わかった？？
+// console.log(restaurant.openingHours.mon?.open);//undefinedになる。
+// console.log(restaurant.openingHours?.mon?.open); //undefined
+//
+// const days = ["mon","tue","wed","thu","fri","sat","sun"];
+// for(const day of days){
+//   //mon undefined
+//   //tue undefined
+//   //wed undefined
+//   //thu 12
+//   //fri 11
+//   //sat 0
+//   //sun undefined　となる！　
+//
+//   // console.log(day);
+//   // console.log(restaurant.openingHours[day]?.open || "closed"); // ||はORダヨ！
+//   // const open = restaurant.openingHours[day]?.open || "closed";
+//   // console.log(`on ${day},we open at ${open}`); //テンプレートリテラル
+//   //しかしこれだと0がfalsey valueということが仇になり、うまく反応しない。
+//   const open = restaurant.openingHours[day]?.open ?? "closed"; //??にすると反応する nullかundefinedか
+//   console.log(`on ${day},we open at ${open}`); //テンプレートリテラル
+// }
+//
+//
+// //Methods
+//
+// console.log(restaurant.order?.(0,1)?? "Methods does not exist");//
+// //0と１で入れてるから、それがstarterIndex とmainIndexに代入されて、ここでは表示が[foccacia,pastaになる]
+// console.log(restaurant.orderRisotto?.(0,1)?? "Methods does not exist");//undefined
+//
+//
+// //Arrays
+// const users = [
+//     {name :"Jonas", email:"hello@jonas.com"
+//     }
+// ];
+//
+// console.log(users[0]?.name ?? "Users is empty"); //Jonas わかった？？
 
 ///for of looping
 // const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
