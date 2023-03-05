@@ -52,47 +52,87 @@ const restaurant = {
     console.log(otherIngredients);//(3)tomatos,"Basil""cheese"こう表示される！
   },
 };
-///SETS⇨重複なし
-const orderSet = new Set([
-  "Pasta",
-  "Pizza",
-  "Pizza",
-  "Risotto",
-  "Pasta",
-  "Pizza"]);
 
-  console.log(orderSet); //Set(3){Pasta,Pizza,Risotto}と重複したものは表示されない。配列に似てる。反復可能
+// ///SETS⇨重複なし
+// const orderSet = new Set([
+//   "Pasta",
+//   "Pizza",
+//   "Pizza",
+//   "Risotto",
+//   "Pasta",
+//   "Pizza"]);
+//
+//   console.log(orderSet); //Set(3){Pasta,Pizza,Risotto}と重複したものは表示されない。配列に似てる。反復可能
+//
+//   console.log(new Set("Miya"));//　M I Y Aと表示される
+//
+//   console.log(orderSet.size); //⇨3と表示される。lengthではないらしい。配列ではないので。何種類の料理を作るかとかわかるためにいいかもしれない。　
+//   console.log(orderSet.has("Pasta")); //true
+//   console.log(orderSet.has("Bread"));//含まれているか？ということ。結果はfalse
+//   console.log(orderSet.has("Garlic Bread"));//false
+//   orderSet.add("Garlic Bread");
+//   orderSet.add("Garlic Bread");
+//   console.log(orderSet); //Set(4){Pasta,Pizza,Risotto,GarlicBread}
+//   console.log(orderSet.has("Garlic Bread")); //true
+//   orderSet.delete("Risotto");//消している
+//   console.log(orderSet);//Set(3){Pasta,Pizza,Garlic Bread}
+//   // orderSet.clear();//全部消す
+//   // console.log(orderSet);//(0)ゼロになった
+//   //Set にはindexという概念がない。そのためorderSet[0]とかやってもundefinedになる。そもそもsetは順番関係なく重複したものを消すよね？だったら順番とか関係なくないk？
+//   console.log("------");
+//   for (const order of orderSet) console.log(order); //pizza pasta garlic Bread
+//   //for ループだから表示形式が少し違う
+//   console.log("------");
+//   const staff = ["Master","Chef","Waiter","Waiter","Owner"];
+//   const  staffUniqe = new Set(staff);
+//   console.log(staff);//(5)"Master","Chef","Waiter","Waiter","Owner"
+//   console.log(staffUniqe); //(4) "Master","Chef","Waiter",Owner" ダブりは解除される
+//   //これを配列に変えてみましょう。
+//   const staffUniqeArray = [...new Set(staff)];
+//   console.log(staffUniqeArray); //(4)["Master","Chef","Waiter",Owner"]
+//   console.log(new Set(["Master","Chef","Waiter","Waiter","Owner"]).size); //4
+//   console.log(new Set("MiyaSasamoto").size); //9
 
-  console.log(new Set("Miya"));//　M I Y Aと表示される
+//MAPS⇨SETよりも便利
+const rest = new Map();
+rest.set("name","Italiano");
+rest.set(1,"Firenze,Italy");
+console.log(rest.set(2,"Lisboa,Poetugal"));//Map(3{'name' => 'Italiano', 1 => 'Firenze,Italy', 2 => 'Lisboa,Poetugal'})
+//Mapはどんどん積み重なっていく感じ。だから、最後だけconsole表示させてもこんな感じで全部表示される
+rest
+.set("categories",['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+.set("open",11)
+.set("close",23);
+console.log(rest);//Map(6)  {'name' => 'Italiano', 1 => 'Firenze,Italy', 2 => 'Lisboa,Poetugal', 'categories' => Array(4), 'open' => 11, …}
+rest
+.set(true,"We are open")
+.set(false,"we are closed");
+console.log(rest); //Map(8) {'name' => 'Italiano', 1 => 'Firenze,Italy', 2 => 'Lisboa,Poetugal', 'categories' => Array(4), 'open' => 11, …}
+console.log(rest.get("name")); //Italianoとなる
+console.log(rest.get("open")); //11 となる
+console.log(rest.get(true));//we are openとなる
 
-  console.log(orderSet.size); //⇨3と表示される。lengthではないらしい。配列ではないので。何種類の料理を作るかとかわかるためにいいかもしれない。　
-  console.log(orderSet.has("Pasta")); //true
-  console.log(orderSet.has("Bread"));//含まれているか？ということ。結果はfalse
-  console.log(orderSet.has("Garlic Bread"));//false
-  orderSet.add("Garlic Bread");
-  orderSet.add("Garlic Bread");
-  console.log(orderSet); //Set(4){Pasta,Pizza,Risotto,GarlicBread}
-  console.log(orderSet.has("Garlic Bread")); //true
-  orderSet.delete("Risotto");//消している
-  console.log(orderSet);//Set(3){Pasta,Pizza,Garlic Bread}
-  // orderSet.clear();//全部消す
-  // console.log(orderSet);//(0)ゼロになった
-  //Set にはindexという概念がない。そのためorderSet[0]とかやってもundefinedになる。そもそもsetは順番関係なく重複したものを消すよね？だったら順番とか関係なくないk？
-  console.log("------");
-  for (const order of orderSet) console.log(order); //pizza pasta garlic Bread
-  //for ループだから表示形式が少し違う
-  console.log("------");
-  const staff = ["Master","Chef","Waiter","Waiter","Owner"];
-  const  staffUniqe = new Set(staff);
-  console.log(staff);//(5)"Master","Chef","Waiter","Waiter","Owner"
-  console.log(staffUniqe); //(4) "Master","Chef","Waiter",Owner" ダブりは解除される
-  //これを配列に変えてみましょう。
-  const staffUniqeArray = [...new Set(staff)];
-  console.log(staffUniqeArray); //(4)["Master","Chef","Waiter",Owner"]
-  console.log(new Set(["Master","Chef","Waiter","Waiter","Owner"]).size); //4
-  console.log(new Set("MiyaSasamoto").size); //9
+const time = 21;
+console.log(rest.get(time > rest.get("open")&& time < rest.get("close"))); //We are open
+const time2 = 10;
+console.log(rest.get(time2 > rest.get("open")&& time2 < rest.get("close"))); //We are closed
 
+console.log(rest.has("categories"));//true
+rest.delete(2); //2であるlisboaを消した
+console.log(rest);//Map(7)になった
+console.log(rest.size)//7
+//ちょっとsetと似ているところもあるのでは？？
+rest.set([1,2],"Test");
+console.log(rest); // Map(8) 
+console.log(rest.get([1,2]));//undefined？？
+//HEApの関係で違うように捉えられる。それを解消するためには、、
 
+const arr = [3,4];//ここで定義をして
+rest.set(arr,"Test2");//その定義したやつをここで利用して、
+console.log(rest)// Map(9) 
+console.log(rest.get(arr));//test2
+rest.set(document.querySelector("h1"),"Heading");
+console.log(rest);//Map(9) HTMLファイルのh1がここで選択される
 
 
 // const properties = Object.keys(openingHours);
