@@ -52,26 +52,68 @@ const restaurant = {
     console.log(otherIngredients);//(3)tomatos,"Basil""cheese"こう表示される！
   },
 };
+///SETS⇨重複なし
+const orderSet = new Set([
+  "Pasta",
+  "Pizza",
+  "Pizza",
+  "Risotto",
+  "Pasta",
+  "Pizza"]);
 
-const properties = Object.keys(openingHours);
-console.log(properties); //(3)[thu,fri,sat]
+  console.log(orderSet); //Set(3){Pasta,Pizza,Risotto}と重複したものは表示されない。配列に似てる。反復可能
 
-// console.log(`We are open on ${properties.length} days`); // we are open on 3 days
-let openStr = `We are open on ${properties.length}days:`;
+  console.log(new Set("Miya"));//　M I Y Aと表示される
 
-for (const day of Object.keys(openingHours)){
-  openStr += `${day},`
-}
-  console.log(openStr); //we are open on 3 days: thu,fri,sat
+  console.log(orderSet.size); //⇨3と表示される。lengthではないらしい。配列ではないので。何種類の料理を作るかとかわかるためにいいかもしれない。　
+  console.log(orderSet.has("Pasta")); //true
+  console.log(orderSet.has("Bread"));//含まれているか？ということ。結果はfalse
+  console.log(orderSet.has("Garlic Bread"));//false
+  orderSet.add("Garlic Bread");
+  orderSet.add("Garlic Bread");
+  console.log(orderSet); //Set(4){Pasta,Pizza,Risotto,GarlicBread}
+  console.log(orderSet.has("Garlic Bread")); //true
+  orderSet.delete("Risotto");//消している
+  console.log(orderSet);//Set(3){Pasta,Pizza,Garlic Bread}
+  // orderSet.clear();//全部消す
+  // console.log(orderSet);//(0)ゼロになった
+  //Set にはindexという概念がない。そのためorderSet[0]とかやってもundefinedになる。そもそもsetは順番関係なく重複したものを消すよね？だったら順番とか関係なくないk？
+  console.log("------");
+  for (const order of orderSet) console.log(order); //pizza pasta garlic Bread
+  //for ループだから表示形式が少し違う
+  console.log("------");
+  const staff = ["Master","Chef","Waiter","Waiter","Owner"];
+  const  staffUniqe = new Set(staff);
+  console.log(staff);//(5)"Master","Chef","Waiter","Waiter","Owner"
+  console.log(staffUniqe); //(4) "Master","Chef","Waiter",Owner" ダブりは解除される
+  //これを配列に変えてみましょう。
+  const staffUniqeArray = [...new Set(staff)];
+  console.log(staffUniqeArray); //(4)["Master","Chef","Waiter",Owner"]
+  console.log(new Set(["Master","Chef","Waiter","Waiter","Owner"]).size); //4
+  console.log(new Set("MiyaSasamoto").size); //9
 
-  const values =  Object.values(openingHours);
-  console.log(values); //3つの値が表示される。thu fri satの
 
-  const entries = Object.entries(openingHours);
-  console.log(entries); //(3)[Array(2),Array(2),Array(2)]
+
+
+// const properties = Object.keys(openingHours);
+// console.log(properties); //(3)[thu,fri,sat]
+//
+// // console.log(`We are open on ${properties.length} days`); // we are open on 3 days
+// let openStr = `We are open on ${properties.length}days:`;
+//
+// for (const day of Object.keys(openingHours)){
+//   openStr += `${day},`
 // }
-for (const x of entries)console.log(x); //キーとバリューが出力
-//(2)[thu ...]みたいな！
+//   console.log(openStr); //we are open on 3 days: thu,fri,sat
+//
+//   const values =  Object.values(openingHours);
+//   console.log(values); //3つの値が表示される。thu fri satの
+//
+//   const entries = Object.entries(openingHours);
+//   console.log(entries); //(3)[Array(2),Array(2),Array(2)]
+// // }
+// for (const x of entries)console.log(x); //キーとバリューが出力
+// //(2)[thu ...]みたいな！
 
 // if(restaurant.openingHours.mon)console.log(restaurant.openingHours.mon.open); //undefined
 // if(restaurant.openingHours.fri)console.log(restaurant.openingHours.fri.open); //11 設定されてるからね！
@@ -460,67 +502,67 @@ Get the team names directly from the game object, don't hardcode them (except fo
 
 GOOD LUCK 😀
 */
-console.log("---CODING CHALLENGE---");
-
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
-
-
-//1
-for(const [i,goals] of game.scored.entries()) //entriesはindexも教えてくれる
-console.log(`Goal ${i + 1} : ${goals}`);
-
-//2 IDK odds = オッズ
-//まず平均の計算がわからない。全部足して、それを数でわる？
-const odds = Object.values(game.odds);　
-let ave = 0;
-for (const odd of odds) ave += odd;// for ループで足していく。
-ave /= odds.length;
-console.log(ave);
-
-//3 WTF fuck off
-// console.log(game.odds);
-// console.log(`Victory ${game.team1}'s odd is ${game.odds}'`);
-for (const [team,odd] of Object.entries(game.odds)){
-  // console.log(team,odd);
-  const teamStr = team === "x" ? "draw" : `Victory ${game[team]}`; //すぐこうやってやるじゃん意味不
-  console.log(`Odds of ${teamStr} ${odd}`);
-}
+// console.log("---CODING CHALLENGE---");
+//
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
+//
+//
+// //1
+// for(const [i,goals] of game.scored.entries()) //entriesはindexも教えてくれる
+// console.log(`Goal ${i + 1} : ${goals}`);
+//
+// //2 IDK odds = オッズ
+// //まず平均の計算がわからない。全部足して、それを数でわる？
+// const odds = Object.values(game.odds);　
+// let ave = 0;
+// for (const odd of odds) ave += odd;// for ループで足していく。
+// ave /= odds.length;
+// console.log(ave);
+//
+// //3 WTF fuck off
+// // console.log(game.odds);
+// // console.log(`Victory ${game.team1}'s odd is ${game.odds}'`);
+// for (const [team,odd] of Object.entries(game.odds)){
+//   // console.log(team,odd);
+//   const teamStr = team === "x" ? "draw" : `Victory ${game[team]}`; //すぐこうやってやるじゃん意味不
+//   console.log(`Odds of ${teamStr} ${odd}`);
+// }
