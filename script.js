@@ -93,48 +93,81 @@ const restaurant = {
 //   console.log(new Set(["Master","Chef","Waiter","Waiter","Owner"]).size); //4
 //   console.log(new Set("MiyaSasamoto").size); //9
 
-//MAPS⇨SETよりも便利
-const rest = new Map();
-rest.set("name","Italiano");
-rest.set(1,"Firenze,Italy");
-console.log(rest.set(2,"Lisboa,Poetugal"));//Map(3{'name' => 'Italiano', 1 => 'Firenze,Italy', 2 => 'Lisboa,Poetugal'})
-//Mapはどんどん積み重なっていく感じ。だから、最後だけconsole表示させてもこんな感じで全部表示される
-rest
-.set("categories",['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
-.set("open",11)
-.set("close",23);
-console.log(rest);//Map(6)  {'name' => 'Italiano', 1 => 'Firenze,Italy', 2 => 'Lisboa,Poetugal', 'categories' => Array(4), 'open' => 11, …}
-rest
-.set(true,"We are open")
-.set(false,"we are closed");
-console.log(rest); //Map(8) {'name' => 'Italiano', 1 => 'Firenze,Italy', 2 => 'Lisboa,Poetugal', 'categories' => Array(4), 'open' => 11, …}
-console.log(rest.get("name")); //Italianoとなる
-console.log(rest.get("open")); //11 となる
-console.log(rest.get(true));//we are openとなる
+// //MAPS⇨SETよりも便利
+// const rest = new Map();
+// rest.set("name","Italiano");
+// rest.set(1,"Firenze,Italy");
+// console.log(rest.set(2,"Lisboa,Poetugal"));//Map(3{'name' => 'Italiano', 1 => 'Firenze,Italy', 2 => 'Lisboa,Poetugal'})
+// //Mapはどんどん積み重なっていく感じ。だから、最後だけconsole表示させてもこんな感じで全部表示される
+// rest
+// .set("categories",['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+// .set("open",11)
+// .set("close",23);
+// console.log(rest);//Map(6)  {'name' => 'Italiano', 1 => 'Firenze,Italy', 2 => 'Lisboa,Poetugal', 'categories' => Array(4), 'open' => 11, …}
+// rest
+// .set(true,"We are open")
+// .set(false,"we are closed");
+// console.log(rest); //Map(8) {'name' => 'Italiano', 1 => 'Firenze,Italy', 2 => 'Lisboa,Poetugal', 'categories' => Array(4), 'open' => 11, …}
+// console.log(rest.get("name")); //Italianoとなる
+// console.log(rest.get("open")); //11 となる
+// console.log(rest.get(true));//we are openとなる
+//
+// const time = 21;
+// console.log(rest.get(time > rest.get("open")&& time < rest.get("close"))); //We are open
+// const time2 = 10;
+// console.log(rest.get(time2 > rest.get("open")&& time2 < rest.get("close"))); //We are closed
+//
+// console.log(rest.has("categories"));//true
+// rest.delete(2); //2であるlisboaを消した
+// console.log(rest);//Map(7)になった
+// console.log(rest.size)//7
+// //ちょっとsetと似ているところもあるのでは？？
+// rest.set([1,2],"Test");
+// console.log(rest); // Map(8) 
+// console.log(rest.get([1,2]));//undefined？？
+// //HEApの関係で違うように捉えられる。それを解消するためには、、
+//
+// const arr = [3,4];//ここで定義をして
+// rest.set(arr,"Test2");//その定義したやつをここで利用して、
+// console.log(rest)// Map(9) 
+// console.log(rest.get(arr));//test2
+// rest.set(document.querySelector("h1"),"Heading");
+// console.log(rest);//Map(9) HTMLファイルのh1がここで選択される
+//
 
-const time = 21;
-console.log(rest.get(time > rest.get("open")&& time < rest.get("close"))); //We are open
-const time2 = 10;
-console.log(rest.get(time2 > rest.get("open")&& time2 < rest.get("close"))); //We are closed
+//Maps : Iteration
+//さっきとは違う値の入れ方
+const question = new Map([
+  ["question", "What is the best programming languese in the world"],
+  [1,"C"],
+  [2,"Java"],
+  [3,"JS"],
+  ["correct", 3],
+  [true,"You got it !"],
+  [false,"NOOO"],
+]);
+console.log(question);//Map(7) {'question' => 'What is the best programming languese in the world', 1 => 'C', 2 => 'Java', 3 => 'JS', 'Correct Answer' => 3, …}となる
+//この書き方の方が簡単かもね
 
-console.log(rest.has("categories"));//true
-rest.delete(2); //2であるlisboaを消した
-console.log(rest);//Map(7)になった
-console.log(rest.size)//7
-//ちょっとsetと似ているところもあるのでは？？
-rest.set([1,2],"Test");
-console.log(rest); // Map(8) 
-console.log(rest.get([1,2]));//undefined？？
-//HEApの関係で違うように捉えられる。それを解消するためには、、
+console.log(Object.entries(openingHours)); //(3)Array(2),Array(2),Array(2)
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);//Map(3)"thu",,,みたいによくわからんが。
 
-const arr = [3,4];//ここで定義をして
-rest.set(arr,"Test2");//その定義したやつをここで利用して、
-console.log(rest)// Map(9) 
-console.log(rest.get(arr));//test2
-rest.set(document.querySelector("h1"),"Heading");
-console.log(rest);//Map(9) HTMLファイルのh1がここで選択される
+//Question
+console.log(question.get("question"));
+for (const [key,value] of question){
+  if(typeof key === "number") console.log(`Answer ${key} : ${value}`); ///Answer 1:Cと感じで3つ表示される　
+}
+// const answer = Number(prompt("Your Answer"));
+// console.log(answer);
 
+// console.log(question.get(question.get("correct") === answer));
+//正解ならyou got it ! 違うならnoooとでる！
 
+//map をarrayにする
+console.log([...question]);///とやれば！
+console.log([...question.keys()]); //['question', 1, 2, 3, 'correct', true, false]
+console.log([...question.values()]);//['What is the best programming languese in the world', 'C', 'Java', 'JS', 3, 'You got it !', 'NOOO']
 // const properties = Object.keys(openingHours);
 // console.log(properties); //(3)[thu,fri,sat]
 //
