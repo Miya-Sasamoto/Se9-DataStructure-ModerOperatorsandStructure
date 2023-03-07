@@ -53,6 +53,48 @@ const restaurant = {
   },
 };
 
+const airline = "TAP Air Portgal";
+const plane = "A320";
+
+console.log(plane[0]); //A
+console.log(plane[1]); //3
+console.log(plane[2]); //2
+console.log("B737"[0]); //B
+
+console.log(airline.length); //15
+console.log("B737".length); //4
+
+console.log(airline.indexOf("r"));  //6 ６番目だから！
+console.log(airline.lastIndexOf("r")); //10 一番最後のrの場所
+console.log(airline.indexOf("portgal")); //-1なぜなら、Portgalと大文字ではないので、見つからないから-1
+
+console.log(airline.slice(4)); //Air Portgal 4番目から始まる言葉を抽出する。部分文字列という
+console.log(airline.slice(5)); //ir Portgalとなる
+console.log(airline.slice(4,7)); //Air となる
+
+///⇧はハードコーディングだった。これからはlengthを知らない状態でコードを書いてみよう。indexOfとかが重要になってくる　
+
+console.log(airline.slice(0,airline.indexOf(" "))); //TAP 最初から、初めてのスペースまでを表示
+console.log(airline.slice(airline.lastIndexOf(" ") + 1 )); //Portgal　最後のスペースより後を表示
+
+console.log(airline.slice(-2)); //al　最後から２番目を表示
+console.log(airline.slice(1,-1)); // AP Air Portgal　最初の一文字を抜かす
+
+const checkMiddleseat = function(seat){
+  //BとEは真ん中の席です
+  const s = seat.slice(-1);
+  if (s === "B" || s === "E"){
+    console.log("You got the middle meat ;(");
+  }else{
+    console.log("You gout luck one !");
+  }
+}
+
+checkMiddleseat("11B"); //You got the middle meat ;(
+checkMiddleseat("23C"); //You gout luck one !
+checkMiddleseat("10A"); //You gout luck one !
+checkMiddleseat("25E"); //You got the middle meat ;(
+
 // ///SETS⇨重複なし
 // const orderSet = new Set([
 //   "Pasta",
@@ -137,37 +179,37 @@ const restaurant = {
 
 //Maps : Iteration
 //さっきとは違う値の入れ方
-const question = new Map([
-  ["question", "What is the best programming languese in the world"],
-  [1,"C"],
-  [2,"Java"],
-  [3,"JS"],
-  ["correct", 3],
-  [true,"You got it !"],
-  [false,"NOOO"],
-]);
-console.log(question);//Map(7) {'question' => 'What is the best programming languese in the world', 1 => 'C', 2 => 'Java', 3 => 'JS', 'Correct Answer' => 3, …}となる
-//この書き方の方が簡単かもね
-
-console.log(Object.entries(openingHours)); //(3)Array(2),Array(2),Array(2)
-const hoursMap = new Map(Object.entries(openingHours));
-console.log(hoursMap);//Map(3)"thu",,,みたいによくわからんが。
-
-//Question
-console.log(question.get("question"));
-for (const [key,value] of question){
-  if(typeof key === "number") console.log(`Answer ${key} : ${value}`); ///Answer 1:Cと感じで3つ表示される　
-}
-// const answer = Number(prompt("Your Answer"));
-// console.log(answer);
-
-// console.log(question.get(question.get("correct") === answer));
-//正解ならyou got it ! 違うならnoooとでる！
-
-//map をarrayにする
-console.log([...question]);///とやれば！
-console.log([...question.keys()]); //['question', 1, 2, 3, 'correct', true, false]
-console.log([...question.values()]);//['What is the best programming languese in the world', 'C', 'Java', 'JS', 3, 'You got it !', 'NOOO']
+// const question = new Map([
+//   ["question", "What is the best programming languese in the world"],
+//   [1,"C"],
+//   [2,"Java"],
+//   [3,"JS"],
+//   ["correct", 3],
+//   [true,"You got it !"],
+//   [false,"NOOO"],
+// ]);
+// console.log(question);//Map(7) {'question' => 'What is the best programming languese in the world', 1 => 'C', 2 => 'Java', 3 => 'JS', 'Correct Answer' => 3, …}となる
+// //この書き方の方が簡単かもね
+//
+// console.log(Object.entries(openingHours)); //(3)Array(2),Array(2),Array(2)
+// const hoursMap = new Map(Object.entries(openingHours));
+// console.log(hoursMap);//Map(3)"thu",,,みたいによくわからんが。
+//
+// //Question
+// console.log(question.get("question"));
+// for (const [key,value] of question){
+//   if(typeof key === "number") console.log(`Answer ${key} : ${value}`); ///Answer 1:Cと感じで3つ表示される　
+// }
+// // const answer = Number(prompt("Your Answer"));
+// // console.log(answer);
+//
+// // console.log(question.get(question.get("correct") === answer));
+// //正解ならyou got it ! 違うならnoooとでる！
+//
+// //map をarrayにする
+// console.log([...question]);///とやれば！
+// console.log([...question.keys()]); //['question', 1, 2, 3, 'correct', true, false]
+// console.log([...question.values()]);//['What is the best programming languese in the world', 'C', 'Java', 'JS', 3, 'You got it !', 'NOOO']
 // const properties = Object.keys(openingHours);
 // console.log(properties); //(3)[thu,fri,sat]
 //
@@ -656,51 +698,51 @@ Let's continue with our football betting app! This time, we have a map with a lo
 GOOD LUCK 😀
 */
 
-const gameEvents = new Map([
-  [17, '⚽️ GOAL'],
-  [36, '🔁 Substitution'],
-  [47, '⚽️ GOAL'],
-  [61, '🔁 Substitution'],
-  [64, '🔶 Yellow card'],
-  [69, '🔴 Red card'],
-  [70, '🔁 Substitution'],
-  [72, '🔁 Substitution'],
-  [76, '⚽️ GOAL'],
-  [80, '⚽️ GOAL'],
-  [92, '🔶 Yellow card'],
-]);
-
-console.log("---CODING CHALLENGE #3");
-//1
-console.log(gameEvents.values());
-const events = [...new Set(gameEvents.values())];
-console.log(events)
-
-//2
-gameEvents.delete(64);
-//最初removeってかいた。
-
-//3
-
-const time = [...gameEvents.keys()].pop();
-console.log(time); //92 。一番最後のものだけ
-console.log(
-  // `An event happened, on average, every ${gameEvents.size} minutes`//あれ？１０だ。
-  `An event happened, on average, every ${time / gameEvents.size} minutes`//ゲームは90分らしい
-);
-
-// console.log(question.get("question"));
-// for (const [key,value] of question){
-//   if(typeof key === "number") console.log(`Answer ${key} : ${value}`); ///Answer 1:Cと感じで3つ表示される　
+// const gameEvents = new Map([
+//   [17, '⚽️ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽️ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽️ GOAL'],
+//   [80, '⚽️ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
+//
+// console.log("---CODING CHALLENGE #3");
+// //1
+// console.log(gameEvents.values());
+// const events = [...new Set(gameEvents.values())];
+// console.log(events)
+//
+// //2
+// gameEvents.delete(64);
+// //最初removeってかいた。
+//
+// //3
+//
+// const time = [...gameEvents.keys()].pop();
+// console.log(time); //92 。一番最後のものだけ
+// console.log(
+//   // `An event happened, on average, every ${gameEvents.size} minutes`//あれ？１０だ。
+//   `An event happened, on average, every ${time / gameEvents.size} minutes`//ゲームは90分らしい
+// );
+//
+// // console.log(question.get("question"));
+// // for (const [key,value] of question){
+// //   if(typeof key === "number") console.log(`Answer ${key} : ${value}`); ///Answer 1:Cと感じで3つ表示される　
+// // }
+// //4
+// // console.log(gameEvents);
+// // for (const [key,value] of gameEvents){
+// //   const
+// //   console.......
+// // }
+//
+// for (const [key,value]of gameEvents){
+//   const half = key < 45 ? "FIRST" : "AFTER";
+//   console.log(`[${half}HALF] ${key} : ${value}`)
 // }
-//4
-// console.log(gameEvents);
-// for (const [key,value] of gameEvents){
-//   const
-//   console.......
-// }
-
-for (const [key,value]of gameEvents){
-  const half = key < 45 ? "FIRST" : "AFTER";
-  console.log(`[${half}HALF] ${key} : ${value}`)
-}
