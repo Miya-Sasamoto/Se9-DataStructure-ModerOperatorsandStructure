@@ -54,46 +54,114 @@ const restaurant = {
 };
 
 const airline = "TAP Air Portgal";
-const plane = "A320";
 
-console.log(plane[0]); //A
-console.log(plane[1]); //3
-console.log(plane[2]); //2
-console.log("B737"[0]); //B
+console.log(airline.toLowerCase()); //全てを小文字に
+console.log(airline.toUpperCase()); //全てを大文字に
+console.log("miya".toUpperCase()); // MIYA
 
-console.log(airline.length); //15
-console.log("B737".length); //4
+//乗客の名前の確認
+const passenger = "jOnaS";
+const passengerLower = passenger.toLowerCase();
+console.log(passengerLower); //jonas
+const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1); //1番目から始まる言葉を追加
+console.log(passengerCorrect); //Jonas
 
-console.log(airline.indexOf("r"));  //6 ６番目だから！
-console.log(airline.lastIndexOf("r")); //10 一番最後のrの場所
-console.log(airline.indexOf("portgal")); //-1なぜなら、Portgalと大文字ではないので、見つからないから-1
+//メールの比較
+const email = "hello@jonas.io";
+const loginemail = " Hello@Jonas.jo \n"
 
-console.log(airline.slice(4)); //Air Portgal 4番目から始まる言葉を抽出する。部分文字列という
-console.log(airline.slice(5)); //ir Portgalとなる
-console.log(airline.slice(4,7)); //Air となる
+// const lowerEmail = loginemail.toLowerCase(); //小文字にする
+// const trimmedEmail = lowerEmail.trim(); //両橋の空白を取り除いた文字列を返す
+// console.log(trimmedEmail); //hello@jonas.io
 
-///⇧はハードコーディングだった。これからはlengthを知らない状態でコードを書いてみよう。indexOfとかが重要になってくる　
+//はいはいそれでは今の流れを一括でやってみましょー
+const normalizedEmail = loginemail.toLowerCase().trim(); //繋げて書くことができる！
+// console.log(normalizedEmail); //hello@jonas.io
+console.log(email === normalizedEmail); //false
+console.log(email === normalizedEmail ? "Yes it is correct" : "NOOT");
 
-console.log(airline.slice(0,airline.indexOf(" "))); //TAP 最初から、初めてのスペースまでを表示
-console.log(airline.slice(airline.lastIndexOf(" ") + 1 )); //Portgal　最後のスペースより後を表示
+//Replacing
+//£を$に変える
+const priceGB = "288,97£";
+console.log(priceGB);
+const priceUS = priceGB.replace("£" , "$").replace(",",".");
+console.log(priceUS);//288.97£
 
-console.log(airline.slice(-2)); //al　最後から２番目を表示
-console.log(airline.slice(1,-1)); // AP Air Portgal　最初の一文字を抜かす
+const announcement = "All passenger come to bording door 23.Bordin door 23!";
+console.log(announcement);
+console.log(announcement.replace("door","gate")); //実はこれだけだと、最初のdoorしかgateにならない。二つ目のdoorはgateにならないのだ。
+console.log(announcement.replaceAll("door","gate")); //replaceAllとやると、全部変えることができる。
 
-const checkMiddleseat = function(seat){
-  //BとEは真ん中の席です
-  const s = seat.slice(-1);
-  if (s === "B" || s === "E"){
-    console.log("You got the middle meat ;(");
+console.log(announcement.replace(/door/g,"gate")); //これでもreplaceAllと同じように全てが痴漢される！
+
+//Booleans
+const plane = "A32neo";
+console.log(plane.includes("A22")); //false  incudes!三単現
+console.log(plane.includes("A32")); //true
+console.log(plane.startsWith("Air")); //false　starts！三単現
+console.log(plane.startsWith("A")); //true
+
+if (plane.startsWith("Airbus") && plane.endsWith("nco")){ //まじでsつけるの忘れる
+  console.log("Part of the new AirBus family!");
+}else{
+  console.log("WTF r u ?");
+}
+
+const checkBaggage = function(items){
+  const baggage = items.toLowerCase();
+  if (baggage.includes("knife") || baggage.includes("gun") ){
+    console.log("You CANNOT bring it ");
   }else{
-    console.log("You gout luck one !");
+    console.log("Enjoy your flights!");
   }
 }
 
-checkMiddleseat("11B"); //You got the middle meat ;(
-checkMiddleseat("23C"); //You gout luck one !
-checkMiddleseat("10A"); //You gout luck one !
-checkMiddleseat("25E"); //You got the middle meat ;(
+checkBaggage("I have laptop,some Food and a pocket Knife");//You CANNOT bring it
+checkBaggage("I have Socks and Camera"); //Enjoy your flights!
+checkBaggage("Got some Snacks and a Gun for protetion"); //You CANNOT bring it
+
+
+// const airline = "TAP Air Portgal";
+// const plane = "A320";
+//
+// console.log(plane[0]); //A
+// console.log(plane[1]); //3
+// console.log(plane[2]); //2
+// console.log("B737"[0]); //B
+//
+// console.log(airline.length); //15
+// console.log("B737".length); //4
+//
+// console.log(airline.indexOf("r"));  //6 ６番目だから！
+// console.log(airline.lastIndexOf("r")); //10 一番最後のrの場所
+// console.log(airline.indexOf("portgal")); //-1なぜなら、Portgalと大文字ではないので、見つからないから-1
+//
+// console.log(airline.slice(4)); //Air Portgal 4番目から始まる言葉を抽出する。部分文字列という
+// console.log(airline.slice(5)); //ir Portgalとなる
+// console.log(airline.slice(4,7)); //Air となる
+//
+// ///⇧はハードコーディングだった。これからはlengthを知らない状態でコードを書いてみよう。indexOfとかが重要になってくる　
+//
+// console.log(airline.slice(0,airline.indexOf(" "))); //TAP 最初から、初めてのスペースまでを表示
+// console.log(airline.slice(airline.lastIndexOf(" ") + 1 )); //Portgal　最後のスペースより後を表示
+//
+// console.log(airline.slice(-2)); //al　最後から２番目を表示
+// console.log(airline.slice(1,-1)); // AP Air Portgal　最初の一文字を抜かす
+//
+// const checkMiddleseat = function(seat){
+//   //BとEは真ん中の席です
+//   const s = seat.slice(-1);
+//   if (s === "B" || s === "E"){
+//     console.log("You got the middle meat ;(");
+//   }else{
+//     console.log("You gout luck one !");
+//   }
+// }
+//
+// checkMiddleseat("11B"); //You got the middle meat ;(
+// checkMiddleseat("23C"); //You gout luck one !
+// checkMiddleseat("10A"); //You gout luck one !
+// checkMiddleseat("25E"); //You got the middle meat ;(
 
 // ///SETS⇨重複なし
 // const orderSet = new Set([
