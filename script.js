@@ -53,72 +53,123 @@ const restaurant = {
   },
 };
 
-const airline = "TAP Air Portgal";
+//Work with String part3
+console.log("a+verynice+string");
+console.log("a+very+nice+string".split("+")); //(4) ['a', 'very', 'nice', 'string'] となる　＋で区切られた
+console.log("Miya:Sasamoto".split(":")); //Miya Sasamoto
 
-console.log(airline.toLowerCase()); //全てを小文字に
-console.log(airline.toUpperCase()); //全てを大文字に
-console.log("miya".toUpperCase()); // MIYA
+const [firstName,lastName] = "Miya Sasamoto".split(" ");
 
-//乗客の名前の確認
-const passenger = "jOnaS";
-const passengerLower = passenger.toLowerCase();
-console.log(passengerLower); //jonas
-const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1); //1番目から始まる言葉を追加
-console.log(passengerCorrect); //Jonas
+const newName =["Ms.",firstName,lastName.toUpperCase()].join(" ");
+console.log(newName); //Ms. Miya SASAMOTO
+//split とjoinは本当によく使えるんだby Jonas
 
-//メールの比較
-const email = "hello@jonas.io";
-const loginemail = " Hello@Jonas.jo \n"
+const capitalizedName = function(name){
+  const names = name.split(" "); //空白で区切る
+  const namesUpper = [];　//大文字にしたやつを格納する配列を作る
 
-// const lowerEmail = loginemail.toLowerCase(); //小文字にする
-// const trimmedEmail = lowerEmail.trim(); //両橋の空白を取り除いた文字列を返す
-// console.log(trimmedEmail); //hello@jonas.io
-
-//はいはいそれでは今の流れを一括でやってみましょー
-const normalizedEmail = loginemail.toLowerCase().trim(); //繋げて書くことができる！
-// console.log(normalizedEmail); //hello@jonas.io
-console.log(email === normalizedEmail); //false
-console.log(email === normalizedEmail ? "Yes it is correct" : "NOOT");
-
-//Replacing
-//£を$に変える
-const priceGB = "288,97£";
-console.log(priceGB);
-const priceUS = priceGB.replace("£" , "$").replace(",",".");
-console.log(priceUS);//288.97£
-
-const announcement = "All passenger come to bording door 23.Bordin door 23!";
-console.log(announcement);
-console.log(announcement.replace("door","gate")); //実はこれだけだと、最初のdoorしかgateにならない。二つ目のdoorはgateにならないのだ。
-console.log(announcement.replaceAll("door","gate")); //replaceAllとやると、全部変えることができる。
-
-console.log(announcement.replace(/door/g,"gate")); //これでもreplaceAllと同じように全てが痴漢される！
-
-//Booleans
-const plane = "A32neo";
-console.log(plane.includes("A22")); //false  incudes!三単現
-console.log(plane.includes("A32")); //true
-console.log(plane.startsWith("Air")); //false　starts！三単現
-console.log(plane.startsWith("A")); //true
-
-if (plane.startsWith("Airbus") && plane.endsWith("nco")){ //まじでsつけるの忘れる
-  console.log("Part of the new AirBus family!");
-}else{
-  console.log("WTF r u ?");
-}
-
-const checkBaggage = function(items){
-  const baggage = items.toLowerCase();
-  if (baggage.includes("knife") || baggage.includes("gun") ){
-    console.log("You CANNOT bring it ");
-  }else{
-    console.log("Enjoy your flights!");
+  for (const n of names){ //ループ
+    namesUpper.push(n[0].toUpperCase() + n.slice(1)); //配列にpushするのは、名前の一番先頭を大文字にしたやつと、それ以降をくっつけたやつ　
   }
+  console.log(namesUpper.join(" "));// でそれを空白を入れてくっつける。めんどくせえ。
 }
 
-checkBaggage("I have laptop,some Food and a pocket Knife");//You CANNOT bring it
-checkBaggage("I have Socks and Camera"); //Enjoy your flights!
-checkBaggage("Got some Snacks and a Gun for protetion"); //You CANNOT bring it
+capitalizedName ("jessica and smith davis"); //Jessica And Smith Davis
+capitalizedName ("miya and noel gonzalez"); //Miya And Noel Gonzalez
+
+const message = "Go to gate 21";
+console.log(message);//Go to gate 21
+console.log(message.padStart(25,"+"));//++++++++++++Go to gate 21 全体で25になるように調節している
+console.log("Miya".padStart(23,"*"));//*******************Miya
+console.log("Miya".padStart(23,"*").padEnd(35,"%")); //*******************Miya%%%%%% padEndは後ろにつける
+
+const maskCreditCard = function(number){
+  const str = number + "";
+  const last = str.slice(-4);
+  return last.padStart(str.length,"*");
+
+}
+
+console.log(maskCreditCard("102731569242873423"));
+console.log(maskCreditCard("3456789876545678123"));
+
+const message2 = "Bad weather ..... All departures delayed";
+console.log(message2.repeat(5)); //これが5回繰り返される
+
+const planesLine = function(n){
+  console.log(`There are ${n} planes in line`);
+}
+
+planesLine(5);
+planesLine(3);
+planesLine(17);
+
+// const airline = "TAP Air Portgal";
+//
+// console.log(airline.toLowerCase()); //全てを小文字に
+// console.log(airline.toUpperCase()); //全てを大文字に
+// console.log("miya".toUpperCase()); // MIYA
+//
+// //乗客の名前の確認
+// const passenger = "jOnaS";
+// const passengerLower = passenger.toLowerCase();
+// console.log(passengerLower); //jonas
+// const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1); //1番目から始まる言葉を追加
+// console.log(passengerCorrect); //Jonas
+//
+// //メールの比較
+// const email = "hello@jonas.io";
+// const loginemail = " Hello@Jonas.jo \n"
+//
+// // const lowerEmail = loginemail.toLowerCase(); //小文字にする
+// // const trimmedEmail = lowerEmail.trim(); //両橋の空白を取り除いた文字列を返す
+// // console.log(trimmedEmail); //hello@jonas.io
+//
+// //はいはいそれでは今の流れを一括でやってみましょー
+// const normalizedEmail = loginemail.toLowerCase().trim(); //繋げて書くことができる！
+// // console.log(normalizedEmail); //hello@jonas.io
+// console.log(email === normalizedEmail); //false
+// console.log(email === normalizedEmail ? "Yes it is correct" : "NOOT");
+//
+// //Replacing
+// //£を$に変える
+// const priceGB = "288,97£";
+// console.log(priceGB);
+// const priceUS = priceGB.replace("£" , "$").replace(",",".");
+// console.log(priceUS);//288.97£
+//
+// const announcement = "All passenger come to bording door 23.Bordin door 23!";
+// console.log(announcement);
+// console.log(announcement.replace("door","gate")); //実はこれだけだと、最初のdoorしかgateにならない。二つ目のdoorはgateにならないのだ。
+// console.log(announcement.replaceAll("door","gate")); //replaceAllとやると、全部変えることができる。
+//
+// console.log(announcement.replace(/door/g,"gate")); //これでもreplaceAllと同じように全てが痴漢される！
+//
+// //Booleans
+// const plane = "A32neo";
+// console.log(plane.includes("A22")); //false  incudes!三単現
+// console.log(plane.includes("A32")); //true
+// console.log(plane.startsWith("Air")); //false　starts！三単現
+// console.log(plane.startsWith("A")); //true
+//
+// if (plane.startsWith("Airbus") && plane.endsWith("nco")){ //まじでsつけるの忘れる
+//   console.log("Part of the new AirBus family!");
+// }else{
+//   console.log("WTF r u ?");
+// }
+//
+// const checkBaggage = function(items){
+//   const baggage = items.toLowerCase();
+//   if (baggage.includes("knife") || baggage.includes("gun") ){
+//     console.log("You CANNOT bring it ");
+//   }else{
+//     console.log("Enjoy your flights!");
+//   }
+// }
+//
+// checkBaggage("I have laptop,some Food and a pocket Knife");//You CANNOT bring it
+// checkBaggage("I have Socks and Camera"); //Enjoy your flights!
+// checkBaggage("Got some Snacks and a Gun for protetion"); //You CANNOT bring it
 
 
 // const airline = "TAP Air Portgal";
