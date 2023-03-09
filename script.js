@@ -1,108 +1,108 @@
 'use strict';
 
 // Data needed for a later exercise
-const flights =
-  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
-
-
-const weekdays = ["mon","tue","wed","thu","fri","sat","sun"];
-const openingHours = { //これはネストされているのか。されている。
-    [weekdays[3]]: {
-      open: 12,
-      close: 22,
-    },
-    [weekdays[4]]: {
-      open: 11,
-      close: 23,
-    },
-    [weekdays[5]]: {
-      open: 0, // Open 24 hours
-      close: 24,
-   },
- };
-
-
-// Data needed for first part of the section
-const restaurant = {
-  name: 'Classico Italiano',
-  location: 'Via Angelo Tavanti 23, Firenze, Italy',
-  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  // openingHours : openingHours, //前はこういう書き方をしていた
-
-  openingHours, //いちよこれで引っ張ってこれる
-
-
-  ///ここめっちゃおもしろい
-  order(starterIndex,mainIndex){　//ここでfuntion定義
-      return[this.starterMenu[starterIndex],this.mainMenu[mainIndex]];
-      //restaurant.という意味でthis.が使われている。その中のarray　の場所を後々定義。
-  },
-  orderDelivery({starterIndex,mainIndex,time,address}){
-    // console.log(obj);//{time:2230-----って感じで表示される。}
-    console.log(`Order Received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
-  },
-
-  orderPasta(ing1,ing2,ing3){
-    console.log(`Here is really delicios pasta with ${ing1},${ing2} and ${ing3}`);
-  },
-  orderPizza(mainIngredients,...otherIngredients){
-    console.log(mainIngredients);//mashrooms
-    console.log(otherIngredients);//(3)tomatos,"Basil""cheese"こう表示される！
-  },
-};
-
-//Work with String part3
-console.log("a+verynice+string");
-console.log("a+very+nice+string".split("+")); //(4) ['a', 'very', 'nice', 'string'] となる　＋で区切られた
-console.log("Miya:Sasamoto".split(":")); //Miya Sasamoto
-
-const [firstName,lastName] = "Miya Sasamoto".split(" ");
-
-const newName =["Ms.",firstName,lastName.toUpperCase()].join(" ");
-console.log(newName); //Ms. Miya SASAMOTO
-//split とjoinは本当によく使えるんだby Jonas
-
-const capitalizedName = function(name){
-  const names = name.split(" "); //空白で区切る
-  const namesUpper = [];　//大文字にしたやつを格納する配列を作る
-
-  for (const n of names){ //ループ
-    namesUpper.push(n[0].toUpperCase() + n.slice(1)); //配列にpushするのは、名前の一番先頭を大文字にしたやつと、それ以降をくっつけたやつ　
-  }
-  console.log(namesUpper.join(" "));// でそれを空白を入れてくっつける。めんどくせえ。
-}
-
-capitalizedName ("jessica and smith davis"); //Jessica And Smith Davis
-capitalizedName ("miya and noel gonzalez"); //Miya And Noel Gonzalez
-
-const message = "Go to gate 21";
-console.log(message);//Go to gate 21
-console.log(message.padStart(25,"+"));//++++++++++++Go to gate 21 全体で25になるように調節している
-console.log("Miya".padStart(23,"*"));//*******************Miya
-console.log("Miya".padStart(23,"*").padEnd(35,"%")); //*******************Miya%%%%%% padEndは後ろにつける
-
-const maskCreditCard = function(number){
-  const str = number + "";
-  const last = str.slice(-4);
-  return last.padStart(str.length,"*");
-
-}
-
-console.log(maskCreditCard("102731569242873423"));
-console.log(maskCreditCard("3456789876545678123"));
-
-const message2 = "Bad weather ..... All departures delayed";
-console.log(message2.repeat(5)); //これが5回繰り返される
-
-const planesLine = function(n){
-  console.log(`There are ${n} planes in line`);
-}
-
-planesLine(5);
-planesLine(3);
-planesLine(17);
+// const flights =
+//   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+//
+//
+// const weekdays = ["mon","tue","wed","thu","fri","sat","sun"];
+// const openingHours = { //これはネストされているのか。されている。
+//     [weekdays[3]]: {
+//       open: 12,
+//       close: 22,
+//     },
+//     [weekdays[4]]: {
+//       open: 11,
+//       close: 23,
+//     },
+//     [weekdays[5]]: {
+//       open: 0, // Open 24 hours
+//       close: 24,
+//    },
+//  };
+//
+//
+// // Data needed for first part of the section
+// const restaurant = {
+//   name: 'Classico Italiano',
+//   location: 'Via Angelo Tavanti 23, Firenze, Italy',
+//   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+//   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+//   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+//   // openingHours : openingHours, //前はこういう書き方をしていた
+//
+//   openingHours, //いちよこれで引っ張ってこれる
+//
+//
+//   ///ここめっちゃおもしろい
+//   order(starterIndex,mainIndex){　//ここでfuntion定義
+//       return[this.starterMenu[starterIndex],this.mainMenu[mainIndex]];
+//       //restaurant.という意味でthis.が使われている。その中のarray　の場所を後々定義。
+//   },
+//   orderDelivery({starterIndex,mainIndex,time,address}){
+//     // console.log(obj);//{time:2230-----って感じで表示される。}
+//     console.log(`Order Received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+//   },
+//
+//   orderPasta(ing1,ing2,ing3){
+//     console.log(`Here is really delicios pasta with ${ing1},${ing2} and ${ing3}`);
+//   },
+//   orderPizza(mainIngredients,...otherIngredients){
+//     console.log(mainIngredients);//mashrooms
+//     console.log(otherIngredients);//(3)tomatos,"Basil""cheese"こう表示される！
+//   },
+// };
+//
+// //Work with String part3
+// console.log("a+verynice+string");
+// console.log("a+very+nice+string".split("+")); //(4) ['a', 'very', 'nice', 'string'] となる　＋で区切られた
+// console.log("Miya:Sasamoto".split(":")); //Miya Sasamoto
+//
+// const [firstName,lastName] = "Miya Sasamoto".split(" ");
+//
+// const newName =["Ms.",firstName,lastName.toUpperCase()].join(" ");
+// console.log(newName); //Ms. Miya SASAMOTO
+// //split とjoinは本当によく使えるんだby Jonas
+//
+// const capitalizedName = function(name){
+//   const names = name.split(" "); //空白で区切る
+//   const namesUpper = [];　//大文字にしたやつを格納する配列を作る
+//
+//   for (const n of names){ //ループ
+//     namesUpper.push(n[0].toUpperCase() + n.slice(1)); //配列にpushするのは、名前の一番先頭を大文字にしたやつと、それ以降をくっつけたやつ　
+//   }
+//   console.log(namesUpper.join(" "));// でそれを空白を入れてくっつける。めんどくせえ。
+// }
+//
+// capitalizedName ("jessica and smith davis"); //Jessica And Smith Davis
+// capitalizedName ("miya and noel gonzalez"); //Miya And Noel Gonzalez
+//
+// const message = "Go to gate 21";
+// console.log(message);//Go to gate 21
+// console.log(message.padStart(25,"+"));//++++++++++++Go to gate 21 全体で25になるように調節している
+// console.log("Miya".padStart(23,"*"));//*******************Miya
+// console.log("Miya".padStart(23,"*").padEnd(35,"%")); //*******************Miya%%%%%% padEndは後ろにつける
+//
+// const maskCreditCard = function(number){
+//   const str = number + "";
+//   const last = str.slice(-4);
+//   return last.padStart(str.length,"*");
+//
+// }
+//
+// console.log(maskCreditCard("102731569242873423"));
+// console.log(maskCreditCard("3456789876545678123"));
+//
+// const message2 = "Bad weather ..... All departures delayed";
+// console.log(message2.repeat(5)); //これが5回繰り返される
+//
+// const planesLine = function(n){
+//   console.log(`There are ${n} planes in line`);
+// }
+//
+// planesLine(5);
+// planesLine(3);
+// planesLine(17);
 
 // const airline = "TAP Air Portgal";
 //
@@ -865,3 +865,58 @@ GOOD LUCK 😀
 //   const half = key < 45 ? "FIRST" : "AFTER";
 //   console.log(`[${half}HALF] ${key} : ${value}`)
 // }
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/*
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+*/
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+// document.querySelector("button").addEventListener("click", function(){
+//   const testDate = textarea.value();
+//   const
+//
+//
+//   for (const [i,])
+// });
+
+document.querySelector("button").addEventListener("click",function(){
+  const text = document.querySelector("textarea").value;//⇨テキストエリアに入れた値を拾う
+  const rows = text.split("\n");//\nで開業で分ける
+
+  for (const row of rows){
+    const [first,second] = row.toLowerCase().trim().split("_");
+    const output = `${first}${second.replace(second[0],second[0].toUpperCase())}`;
+    console.log(output);　
+  }
+  // console.log("Hello"); テスト用
+});
